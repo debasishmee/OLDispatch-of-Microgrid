@@ -41,20 +41,52 @@ if __name__ == '__main__':
 
     db = firestore.Client()
 
-    Generation_grid = random.randint(0,100)                    # [a, b], start the humidity at some random value
+                       # [a, b], start the humidity at some random value
     Generation_grid_max_delta = 10
 
-    for _ in range(simulation_count):
+    for x in range(simulation_count):
         doc_current = 'current';                       # only storing the current sensor readings
         doc_historic = build_historic_doc_name();      # storing an array of all sensor readings for the time bucket
 
-        Generation_grid = random.randint(max(0, Generation_grid - Generation_grid_max_delta), min(100, Generation_grid + Generation_grid_max_delta))                    # [a, b]
-        Dispatch_grid = random.randint(60, 80)
+       # Generation_grid = random.randint(max(0, Generation_grid - Generation_grid_max_delta), min(100, Generation_grid + Generation_grid_max_delta))                    # [a, b]
+        if x <= 10: # total requirement 120-150
+            Dispatch_grid = random.randint(120, 160)
+            Generation_grid = random.randint(100,200) 
+
+            Generation_PV = random.randint(2, 10)
+            Dispatch_PV = random.randint(40, 50)
+
+            Generation_Wind = random.randint(60, 80)
+            Dispatch_Wind = random.randint(60, 80)
+        elif x > 10 and x <=20:
+            Dispatch_grid = random.randint(60, 80)
+            Generation_grid = random.randint(100,200) 
+
+            Generation_PV = random.randint(50, 60)
+            Dispatch_PV = random.randint(70, 80)
+
+            Generation_Wind = random.randint(60, 80)
+            Dispatch_Wind = random.randint(60, 80)
+        else: 
+            Dispatch_grid = random.randint(160, 180) # total requirement 160-180
+            Generation_grid = random.randint(100,200) 
+
+            Generation_PV = random.randint(2, 10)
+            Dispatch_PV = random.randint(40, 50)
+
+            Generation_Wind = random.randint(60, 80)
+            Dispatch_Wind = random.randint(60, 80)
+
         print(f'Generation-grid: {Generation_grid}, Dispatch-grid: {Dispatch_grid}')
 
         data = {
             u'Generation_grid': Generation_grid,
             u'Dispatch_grid': Dispatch_grid,
+            u'Generation_PV': Generation_PV,
+            u'Dispatch_PV': Dispatch_PV,
+            u'Generation_Wind': Generation_Wind,
+            u'Dispatch_Wind': Dispatch_Wind,
+
             u'timestamp': datetime.utcnow(),                # use utcnow() instead of now(), otherwise the timezone offset will be applied twice
             # u'timestamp': firestore.SERVER_TIMESTAMP
         }
@@ -65,6 +97,10 @@ if __name__ == '__main__':
             u'historicalMeasurements': firestore.ArrayUnion( [{ 
                 u'Generation_grid': Generation_grid,
                 u'Dispatch_grid': Dispatch_grid,
+                u'Generation_PV': Generation_PV,
+                u'Dispatch_PV': Dispatch_PV,
+                u'Generation_Wind': Generation_Wind,
+                u'Dispatch_Wind': Dispatch_Wind,
                 u'timestamp': datetime.utcnow(),                # use utcnow() instead of now(), otherwise the timezone offset will be applied twice
                 # u'timestamp': firestore.SERVER_TIMESTAMP
             }] )

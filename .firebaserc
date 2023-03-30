@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "oldispatch-of-microgrid": {
+      "hosting": {
+        "OLdispatch-of-Microgrid": [
+          "oldispatch-of-microgrid"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "oldispatch-of-microgrid"
+  }
+}

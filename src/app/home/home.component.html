@@ -1,6 +1,393 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
+<style>
+     :host {
+       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+       font-size: 14px;
+       color: #333;
+       box-sizing: border-box;
+       -webkit-font-smoothing: antialiased;
+       -moz-osx-font-smoothing: grayscale;
+     }
+     .toolbar {
+       position: absolute;
+       top: 0;
+       left: 0;
+       right: 0;
+       height: 80px;
+       display: flex;
+       align-items: center;
+       background-color: #FEE23E;
+       color: yellowgreen;
+       font-weight: 600;
+     }
+   
+     .toolbar img {
+       margin: 0 16px;
+     }
+     .content {
+       display: flex;
+       margin: 82px auto 32px;
+       padding: 0 16px;
+       max-width: 1180px;
+       flex-direction: column;
+       align-items: center;
+     }
+     
+   .wrapper{
+       width: 1000px;
+       
+       margin: 0 auto;
+   }
+   .menu-button{
+       background-color: #fdc12a;
+       color: black;
+       padding: 15px;
+       font-size: 15px;
+       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+       font-style: bold;
+       cursor: pointer;
+       border: 7px solid #fff;
+   
+   }
+   
+   .right-menu{
+       position: relative;
+       display: inline-block;
+       left: 1080px;
+   
+   }
+   .drop-down-menu{
+       display: none;
+       position: absolute;
+       background-color: #FEE23E;
+       min-width: 170px;
+       z-index: 1;
+   }
+   .drop-down-menu a:hover{
+       background-color: #000;
+       color: #ff9d00;
+   }
+   .right-menu:hover .drop-down-menu{
+       display: block;
+   }
+   .right-menu:hover .menu-button{
+       background-color: transparent;
+   }
+   .fcc-btn {
+     background-color: #fdc12a;
+     color:#000;
+     padding: 5px 57px;
+     text-decoration: none;
+     cursor: pointer;
+     border:#000;
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     font-size: small;
+   }
+   #login-box {
+    position: relative;
+    margin: 5% auto;
+    width: 600px;
+    height: 400px;
+    background: #FEE23E;
+    border-radius: 2px;
+   
+}
 
+.left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    padding: 40px;
+    width: 300px;
+    height: 400px;
+}
 
-<div>
-    <canvas id="chartHumidity"></canvas>
-</div>
+h1 {
+    margin: 0 0 20px 0;
+    font-weight: 300;
+    font-size: 28px;
+}
+
+input[type="text"],
+input[type="password"] {
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    padding: 4px;
+    width: 220px;
+    height: 32px;
+    border: none;
+    border-bottom: 1px solid #AAA;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    transition: 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-bottom: 2px solid #16a085;
+    color: #16a085;
+    transition: 0.2s ease;
+}
+
+input[type="submit"] {
+    margin-top: 28px;
+    width: 120px;
+    height: 32px;
+    background: #16a085;
+    border: none;
+    border-radius: 2px;
+    color: #FFF;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: 0.1s ease;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+    opacity: 0.8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    transition: 0.1s ease;
+}
+
+input[type="submit"]:active {
+    opacity: 1;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    transition: 0.1s ease;
+}
+
+.or {
+    position: absolute;
+    top: 180px;
+    left: 280px;
+    width: 40px;
+    height: 40px;
+    background: #DDD;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    line-height: 40px;
+    text-align: center;
+}
+
+.right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    box-sizing: border-box;
+    padding: 40px;
+    width: 300px;
+    height: 400px;
+    background: url('https://goo.gl/YbktSj');
+    background-size: cover;
+    background-position: center;
+    border-radius: 0 2px 2px 0;
+}
+
+.right .loginwith {
+    display: block;
+    margin-bottom: 40px;
+    font-size: 28px;
+    color: #FFF;
+    text-align: center;
+}
+
+button.social-signin {
+    margin-bottom: 20px;
+    width: 220px;
+    height: 36px;
+    border: none;
+    border-radius: 2px;
+    color: #FEE;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+
+button.social-signin:hover,
+button.social-signin:focus {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    transition: 0.2s ease;
+}
+
+button.social-signin:active {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    transition: 0.2s ease;
+}
+
+button.social-signin.facebook {
+    background: #32508E;
+}
+
+button.social-signin.twitter {
+    background: #55ACEE;
+}
+
+button.social-signin.google {
+    background: #DD4B39;
+}
+     
+   </style>
+   <!DOCTYPE html>
+   <html style="background-image:url(https://i.pinimg.com/564x/a3/92/82/a39282f15e3701aeb512df5b200f3e6a.jpg)">
+   <!-- Toolbar -->
+   <div class="toolbar" role="banner">
+     <img width="60" alt="UN Logo"src="data:image/png;base64,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"/>
+     <span style="color: #24292e;">Welcome, USER! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <h1>Microgrid Power Portal</h1></span>
+     <div class="spacer"></div>
+   </div>
+   <nav>
+     <div class="wrapper">
+          <div class="right-menu">
+          <button class="menu-button">Menu</button>
+         
+               <div class="drop-down-menu">
+                    <a class="fcc-btn" href="https://console.firebase.google.com/project/oldispatch-of-microgrid/firestore/data/~2FMydata1~2F2023_02_26_h20" target="_blank">
+                    Database&nbsp;&nbsp;&nbsp;</a><br><br>
+                    <a class="fcc-btn" href="https://www.nrel.gov/index.html" target="_blank">
+                    About&nbsp;Page</a><br><br>
+                    <a class="fcc-btn" href="https://sdg-tracker.org/energy" target="_blank">
+                    UN&nbsp;&nbsp;SDG&nbsp;&nbsp;&nbsp;</a><br><br>
+                    <a class="fcc-btn" href="https://mnre.gov.in/solar/schemes" target="_blank">
+                    Schemes&nbsp;&nbsp;&nbsp;</a> <br><br>
+                    <a class="fcc-btn" href="https://www.cesc.co.in/roofTopSolarGuide" target="_blank">
+                    Sell&nbsp;To&nbsp;Grid&nbsp;</a> <br><br>
+                    <a class="fcc-btn" href="https://www.google.com/" target="_blank">
+                    Sign&nbsp;&nbsp;Out&nbsp;&nbsp;&nbsp;</a>
+               </div> 
+          </div>
+     </div>
+   </nav>
+   <div class="content" role="main">
+     <table bgcolor="#FEE23E">
+          <tr align="center">
+               <td align="center">
+                    <div id="login-box">
+                         <div class="left">
+                             <form >
+                                 <h1>Sign up</h1>
+                                 <input type="text"  placeholder="username" />
+                                 <input type="text"  placeholder="E-mail" />
+                                 <input type="password"  placeholder="Password" />
+                     
+                                 <input type="submit" id="saveData" name="signup_submit" value="Sign in" />
+                             </form>
+                         </div>
+                         <div class="right">
+                             <span class="loginwith">Sign in with<br />social network</span>
+                             <button class="social-signin facebook">Log in with facebook</button>
+                             <button class="social-signin twitter">Log in with Twitter</button>
+                             <button class="social-signin google" id='login'>Log in with Google+</button>
+                         </div>
+                         <div class="or">OR</div>
+                     </div>
+               </td>
+               
+               <td align="center"style="background-color : #FEE23E"></td><h1 style="padding: 14px;  background-color : #FEE23E;">
+               <img width="500" alt="Working" src="https://grist.org/wp-content/uploads/2013/04/solar-panels-homepage.jpg"/><br>
+             PV IS ONLINE!!&nbsp;&nbsp;
+             <img width="100" alt="Working" src="https://www.clipartmax.com/png/middle/212-2121718_check-mark-computer-icons-customer-service-theme-clip-green-tick-icon-png.png"/></h1>
+             </tr>
+            <!-- <tr>
+             <td align="center" style="background-color : #FEE23E"> 
+                    <font face="Segoe UI" size=3> 
+                         <table style="border:14px solid #FEE23E" bgcolor="#FEE23E" style="width: 1000px" >
+                             <tr><td><h3>PV Specifications:</h3></td></tr>
+                              <tr>
+                                   <td align="center">PV Installed:           24/12/2018</td>
+                                   <td>Type:                   Mono-Crystalline Silicon</td>
+                                   <td>Cell Efficiency:        19.3% </td>
+                              </tr>
+                              
+
+                              <tr>
+                                   <td>Module Efficiency:      17.2% </td>
+                                   <td>Maximum Power:          215W</td>
+                                   <td>Maximum Power Voltage:  42V</td>
+                         </tr>
+                              <tr>
+                                   <td>Maximum Power Current:  5.13A</td>
+                                   <td>Open Circuit Voltage:   51.6V</td>
+                                   <td>Short circuit current: 11.48A</td>
+                         </tr>
+                              <tr>
+                                   <td>Warranted Minimum Power:204.3W</td>
+                                   <td>Module Area:            1.25m2</td>
+                                   <td>No. of Modules:         8</td>
+                              </tr>
+                             <tr><td>NOCT:                   45 C</td></tr> 
+                              <tr><td>Product warranty: 12 years</td></tr>
+                         </table>
+                    </font>
+               </td>
+          </tr>-->
+   
+     </table>
+   </div>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <div style="text-align:center">
+     <table  align="center">
+     <tr align="center">
+         <div style="float: left;width: 700px;">
+          <canvas id="chartHumidity" width="250" height="200" ></canvas>
+         </div>
+     </tr>
+     <tr>
+          <div style="float: left;width: 700px;">
+           <canvas id="chartHumidity1" width="250" height="200"></canvas>
+          </div>
+     </tr>
+     <tr>
+          <div style="float: left;width: 700px;">
+           <canvas id="chartHumidity2" width="250" height="200"></canvas>
+          </div>
+         </tr>
+     <tr>
+         
+         <div style="float: left;width: 700px;">
+           <canvas id="chartHumidity3" width="250" height="200"></canvas>
+          </div>
+         </tr>
+         <tr>
+         
+          <div style="float: left;width: 700px;">
+           <canvas id="chartHumidity4" width="250" height="200"></canvas>
+          </div>
+         </tr>
+     </table>
+       </div>
+       
+   </html>
+     
+     
+   
+   
+   <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+   <!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
+   <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+   <!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+   <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+   <!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
+   <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+   
+   <router-outlet></router-outlet>
+   

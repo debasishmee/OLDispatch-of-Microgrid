@@ -7,6 +7,8 @@ import { debounceTime } from 'rxjs/operators';
 import firebase from 'firebase/compat/app';
 import 'firebase/firestore';
 
+
+
 import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
 @Component({
@@ -19,6 +21,22 @@ export class HomeComponent implements OnInit {
   public canvasHumidity: any;                             // HTML canvas
   public ctxHumidity: any;                                // context for the HTML canvas
   public chartHumidity: any;                              // chart object for Chart.js
+
+  public canvasHumidity1: any;                             // HTML canvas
+  public ctxHumidity1: any;                                // context for the HTML canvas
+  public chartHumidity1: any;   
+
+  public canvasHumidity2: any;                             // HTML canvas
+  public ctxHumidity2: any;                                // context for the HTML canvas
+  public chartHumidity2: any;  
+
+  public canvasHumidity3: any;                             // HTML canvas
+  public ctxHumidity3: any;                                // context for the HTML canvas
+  public chartHumidity3: any;  
+
+  public canvasHumidity4: any;                             // HTML canvas
+  public ctxHumidity4: any;                                // context for the HTML canvas
+  public chartHumidity4: any;
 
   public humiditySensorReading: any;                      // form input of new sensor value
   public temperatureSensorReading: any;
@@ -42,9 +60,18 @@ export class HomeComponent implements OnInit {
           debounceTime(200)                                                                                           // discard miltiple emitted values within n milliseconds
       )
           .subscribe((data: any) => {
-              if (data && data.hasOwnProperty('Generation_grid'))
-                  this.addDataToChart(this.chartHumidity, '', data['Generation_grid']);  // when the 'current' doc changes, place the new humidity value in the chart
+             // if (data && data.hasOwnProperty('Generation_grid'))
+                this.addDataToChart(this.chartHumidity, '', data['Generation_grid']);  // when the 'current' doc changes, place the new humidity value in the chart
+             // if (data && data.hasOwnProperty('Dispatch_grid'))
+                this.addDataToChart(this.chartHumidity1, '', data['Dispatch_grid']);   
+              // when the 'current' doc changes, place the new humidity value in the chart
+              //  this.addDataToChart1(this.chartHumidity1, '', data['Dispatch_grid']);
+              this.addDataToChart(this.chartHumidity2, '', data['Generation_PV']);
+              this.addDataToChart(this.chartHumidity3, '', data['Dispatch_PV']); 
+              this.addDataToChart(this.chartHumidity4, '', data['Dispatch_PV']); 
           });
+
+          
 
       console.log('docNameHistoric', docNameHistoric);
       this.firestore.collection('Mydata1').doc(docNameHistoric).ref.get().then((doc) => {        // get the current hour's historical readings just once (without an observable)
@@ -77,7 +104,102 @@ export class HomeComponent implements OnInit {
                       beginAtZero: true
                   }
               }
+              
           }
+          
+      });
+
+      this.canvasHumidity1 = document.getElementById('chartHumidity1');
+      this.ctxHumidity1 = this.canvasHumidity1.getContext('2d');
+      this.chartHumidity1 = new Chart(this.ctxHumidity1, {
+          type: 'line',
+          data: {
+              // labels: ['a', 'b', 'c', 'd', 'e', 'f', 'g'],
+              labels: [],
+              datasets: [{
+                  label: 'Dispatch from grid',
+                  data: [],
+                  fill: false,
+                  borderColor: 'rgb(51, 104, 255)',
+                  tension: 0.1
+              }]
+          },
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+
+      this.canvasHumidity2 = document.getElementById('chartHumidity2');
+      this.ctxHumidity2 = this.canvasHumidity2.getContext('2d');
+      this.chartHumidity2 = new Chart(this.ctxHumidity2, {
+          type: 'line',
+          data: {
+              // labels: ['a', 'b', 'c', 'd', 'e', 'f', 'g'],
+              labels: [],
+              datasets: [{
+                  label: 'Generation from PV',
+                  data: [],
+                  fill: false,
+                  borderColor: 'rgb(51, 104, 255)',
+                  tension: 0.1,
+
+              }],
+          },
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+      this.canvasHumidity3 = document.getElementById('chartHumidity3');
+      this.ctxHumidity3 = this.canvasHumidity3.getContext('2d');
+      this.chartHumidity3 = new Chart(this.ctxHumidity3, {
+          type: 'line',
+          data: {
+              // labels: ['a', 'b', 'c', 'd', 'e', 'f', 'g'],
+              labels: [],
+              datasets: [{
+                  label: 'Profit Chart',
+                  data: [],
+                  fill: false,
+                  borderColor: 'rgb(51, 104, 255)',
+                  tension: 0.1
+              }]
+          },
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+
+      this.canvasHumidity4 = document.getElementById('chartHumidity4');
+      this.ctxHumidity4 = this.canvasHumidity4.getContext('2d');
+      this.chartHumidity4 = new Chart(this.ctxHumidity4, {
+          type: 'pie',
+          data: {
+              // labels: ['a', 'b', 'c', 'd', 'e', 'f', 'g'],
+              labels: [],
+              datasets: [{
+                label: 'My First Dataset',
+                data: [],
+                backgroundColor: [
+                  'rgb(255, 99, 132)',
+                  'rgb(54, 162, 235)',
+                  'rgb(255, 205, 86)'
+                ],
+                hoverOffset: 4
+              }]
+          },
+          
       });
   }
 
@@ -143,5 +265,4 @@ export class HomeComponent implements OnInit {
       });
       chart.update();
   }
-
 }
