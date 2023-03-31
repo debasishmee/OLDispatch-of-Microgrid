@@ -38,6 +38,14 @@ export class HomeComponent implements OnInit {
   public ctxHumidity4: any;                                // context for the HTML canvas
   public chartHumidity4: any;
 
+  public canvasHumidity5: any;                             // HTML canvas
+  public ctxHumidity5: any;                                // context for the HTML canvas
+  public chartHumidity5: any;
+
+  public canvasHumidity6: any;                             // HTML canvas
+  public ctxHumidity6: any;                                // context for the HTML canvas
+  public chartHumidity6: any;
+
   public humiditySensorReading: any;                      // form input of new sensor value
   public temperatureSensorReading: any;
   
@@ -63,12 +71,14 @@ export class HomeComponent implements OnInit {
              // if (data && data.hasOwnProperty('Generation_grid'))
                 this.addDataToChart(this.chartHumidity, '', data['Generation_grid']);  // when the 'current' doc changes, place the new humidity value in the chart
              // if (data && data.hasOwnProperty('Dispatch_grid'))
-                this.addDataToChart(this.chartHumidity1, '', data['Dispatch_grid']);   
+                this.addDataToChart(this.chartHumidity1, '', data['Generation_PV']);   
               // when the 'current' doc changes, place the new humidity value in the chart
               //  this.addDataToChart1(this.chartHumidity1, '', data['Dispatch_grid']);
-              this.addDataToChart(this.chartHumidity2, '', data['Generation_PV']);
-              this.addDataToChart(this.chartHumidity3, '', data['Dispatch_PV']); 
-              this.addDataToChart(this.chartHumidity4, '', data['Dispatch_PV']); 
+              this.addDataToChart(this.chartHumidity2, '', data['Generation_total']);
+              this.addDataToChart(this.chartHumidity3, '', data['Demand_total']); 
+              this.addDataToChart(this.chartHumidity4, '', data['Excess_energy']);
+              this.addDataToChart(this.chartHumidity5, '', data['Profit']); 
+              this.addDataToChart(this.chartHumidity6, '', data['Profit']); 
           });
 
           
@@ -117,7 +127,7 @@ export class HomeComponent implements OnInit {
               // labels: ['a', 'b', 'c', 'd', 'e', 'f', 'g'],
               labels: [],
               datasets: [{
-                  label: 'Dispatch from grid',
+                  label: 'Generation from PV',
                   data: [],
                   fill: false,
                   borderColor: 'rgb(51, 104, 255)',
@@ -141,7 +151,7 @@ export class HomeComponent implements OnInit {
               // labels: ['a', 'b', 'c', 'd', 'e', 'f', 'g'],
               labels: [],
               datasets: [{
-                  label: 'Generation from PV',
+                  label: 'Total Generation',
                   data: [],
                   fill: false,
                   borderColor: 'rgb(51, 104, 255)',
@@ -165,6 +175,52 @@ export class HomeComponent implements OnInit {
               // labels: ['a', 'b', 'c', 'd', 'e', 'f', 'g'],
               labels: [],
               datasets: [{
+                  label: 'Total Demand',
+                  data: [],
+                  fill: false,
+                  borderColor: 'rgb(51, 104, 255)',
+                  tension: 0.1
+              }]
+          },
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+      this.canvasHumidity4 = document.getElementById('chartHumidity4');
+      this.ctxHumidity4 = this.canvasHumidity4.getContext('2d');
+      this.chartHumidity4 = new Chart(this.ctxHumidity4, {
+          type: 'line',
+          data: {
+              // labels: ['a', 'b', 'c', 'd', 'e', 'f', 'g'],
+              labels: [],
+              datasets: [{
+                  label: 'Excess Energy',
+                  data: [],
+                  fill: false,
+                  borderColor: 'rgb(51, 104, 255)',
+                  tension: 0.1
+              }]
+          },
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+      this.canvasHumidity5 = document.getElementById('chartHumidity5');
+      this.ctxHumidity5 = this.canvasHumidity5.getContext('2d');
+      this.chartHumidity5 = new Chart(this.ctxHumidity5, {
+          type: 'line',
+          data: {
+              // labels: ['a', 'b', 'c', 'd', 'e', 'f', 'g'],
+              labels: [],
+              datasets: [{
                   label: 'Profit Chart',
                   data: [],
                   fill: false,
@@ -181,9 +237,9 @@ export class HomeComponent implements OnInit {
           }
       });
 
-      this.canvasHumidity4 = document.getElementById('chartHumidity4');
-      this.ctxHumidity4 = this.canvasHumidity4.getContext('2d');
-      this.chartHumidity4 = new Chart(this.ctxHumidity4, {
+      this.canvasHumidity6 = document.getElementById('chartHumidity6');
+      this.ctxHumidity6 = this.canvasHumidity6.getContext('2d');
+      this.chartHumidity6 = new Chart(this.ctxHumidity6, {
           type: 'pie',
           data: {
               // labels: ['a', 'b', 'c', 'd', 'e', 'f', 'g'],
